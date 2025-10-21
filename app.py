@@ -89,14 +89,15 @@ def get_user_input():
     slope_options = sorted(df['slope'].unique())
     restecg_options = sorted(df['restecg'].unique())
 
-    age = st.sidebar.slider("Age", int(df['age'].min()), int(df['age'].max()), int(df['age'].median()))
+    # Age slider extended 0-100
+    age = st.sidebar.slider("Age", 0, 100, int(df['age'].median()))
     sex = st.sidebar.selectbox("Sex", options=[0, 1], format_func=lambda x: "Female" if x==0 else "Male")
     cp = st.sidebar.selectbox("Chest Pain Type", cp_options)
     trestbps = st.sidebar.slider("Resting BP", int(df['trestbps'].min()), int(df['trestbps'].max()), int(df['trestbps'].median()))
     chol = st.sidebar.slider("Cholesterol", int(df['chol'].min()), int(df['chol'].max()), int(df['chol'].median()))
     fbs = st.sidebar.selectbox("Fasting Blood Sugar >120", [0, 1], format_func=lambda x: "False" if x==0 else "True")
     restecg = st.sidebar.selectbox("Resting ECG", restecg_options)
-    thalch = st.sidebar.slider("Max Heart Rate", int(df['thalch'].min()), int(df['thalch'].max()), int(df['thalch'].median()))
+    thalch = st.sidebar.slider("Max Heart Rate", 0, 250, int(df['thalch'].median()))  # max 250 for safety
     exang = st.sidebar.selectbox("Exercise Induced Angina", [0, 1], format_func=lambda x: "No" if x==0 else "Yes")
     oldpeak = st.sidebar.slider("ST Depression", float(df['oldpeak'].min()), float(df['oldpeak'].max()), float(df['oldpeak'].median()))
     slope = st.sidebar.selectbox("Slope of ST Segment", slope_options)
